@@ -1,0 +1,674 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Brand Colors */
+    --primary-dark: #0a0a0a;
+    --primary-light: #ffffff;
+    --accent-neon: #00ff88;
+    --accent-purple: #7b68ee;
+    --accent-pink: #ff006e;
+    --accent-blue: #00d4ff;
+    
+    /* Grays */
+    --gray-900: #111111;
+    --gray-800: #1a1a1a;
+    --gray-700: #2a2a2a;
+    --gray-600: #3a3a3a;
+    --gray-500: #666666;
+    --gray-400: #999999;
+    --gray-300: #cccccc;
+    --gray-200: #e5e5e5;
+    --gray-100: #f5f5f5;
+    
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+    --space-xxl: 8rem;
+    
+    /* Typography */
+    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.4s ease;
+    --transition-slow: 0.6s ease;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.24);
+    
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-blur: blur(20px);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography System */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h4 {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray-300);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-fast);
+}
+
+button {
+    font-family: var(--font-primary);
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: all var(--transition-medium);
+}
+/*Sreach Box */
+.search-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:white;
+    padding:5px;
+    border-radius:30px;
+    width:300px;
+    margin:20px auto;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    padding:10px;
+    font-size:16px;
+    border-radius:30px;
+    width:100%;
+}
+
+.search-box button{
+    border:none;
+    background:#2e7d32;
+    color:white;
+    padding:10px 15px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.search-box button:hover{
+    background:#abe3af;
+    transform:scale(1.1);
+}
+
+.search-box input:focus{
+    background:#f1fff1;
+}
+
+
+/* Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1.5rem 0;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--accent-neon), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-neon), var(--accent-blue));
+    transition: width var(--transition-medium);
+}
+
+ .nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+ .nav-link:hover {
+    color: var(--accent-neon);
+} 
+
+.nav-actions {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-icon {
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: transform var(--transition-fast); 
+}
+
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 8rem 2rem 4rem;
+}
+
+/* .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+} */
+.hero-background {
+    position: fixed;       /* Changed from absolute */
+    width: 100vw;         /* Full viewport width */
+     height: 100vh;        /*Full viewport height */
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+.orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-purple), transparent);
+    top: -200px;
+    left: -200px;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-neon), transparent);
+    bottom: -150px;
+    right: -150px;
+}
+
+.orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--accent-pink), transparent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    margin-bottom: 1.5rem;
+}
+
+.title-line {
+    display: block;
+    background: linear-gradient(135deg, var(--primary-light), var(--gray-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--gray-300);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button.primary {
+    background: linear-gradient(135deg, var(--accent-neon), var(--accent-blue));
+    color: var(--primary-dark);
+    box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+}
+
+.cta-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 255, 136, 0.4);
+}
+
+.cta-button.secondary {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    color: var(--primary-light);
+}
+
+.cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-400);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--accent-neon));
+}
+
+/* Section Styling */
+section {
+    padding: var(--space-xl) 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    margin-bottom: var(--space-lg);
+}
+
+.section-header.centered {
+    text-align: center;
+}
+
+.section-tag {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-neon);
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    margin-bottom: 1rem;
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--gray-400);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Image Placeholders with Gradients */
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.gradient-1 {
+    background-image: url(https://veirdo.in/cdn/shop/files/34_3a833566-9262-4ea6-b93f-e2e9f1eb8f15.jpg?v=1754546131);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-2 {
+    background-image: url(https://5.imimg.com/data5/ECOM/Default/2024/8/442920024/FI/DT/ID/90086993/mspant50774-1-500x500.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-3 {
+    background-image: url(https://www.captchabrand.com/cdn/shop/files/Metallica_Band_Black_Oversized_Tshirt_for_Men.jpg?v=1738343616&width=1445);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-4 {
+    background-image: url(https://effortlessgent.com/wp-content/uploads/2020/01/minimal-white-sneakers-Kurt.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-5 {
+    background-image: url(https://images-cdn.ubuy.co.in/693869e8785eaf484d022d14-men-s-denim-jackets-distressed-vintage.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-6 {
+    background-image: url(https://images-cdn.ubuy.co.in/66a35d204d59af347001c0b6-lilychan-men-39-s-summer-work-utility.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-7 {
+    background-image: url(https://assets.ajio.com/medias/sys_master/root/20230525/Hxnx/646f479642f9e729d7c8de12/-473Wx593H-464992786-black-MODEL.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-8 {
+    background-image: url(https://m.media-amazon.com/images/I/61mLQUv2AkL._AC_SL1129_.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-9 {
+    background-image: url(https://m.media-amazon.com/images/I/61zXG2OWWgL._AC_UY1100_.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-10 {
+    background-image: url(https://levi.in/cdn/shop/files/A77110018_05_Styleshot.jpg?v=1767769889);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gradient-11 {
+    background-image: url(http://cdn.shopify.com/s/files/1/0260/8824/3286/files/2_480x480.jpg?v=1733202300);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Footer */
+.main-footer {
+    background: var(--gray-900);
+    border-top: 1px solid var(--gray-800);
+    padding: var(--space-xl) 2rem var(--space-md);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--accent-neon), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-tagline {
+    color: var(--gray-400);
+    font-size: 0.95rem;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.social-icon:hover {
+    transform: scale(1.15);
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-column h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-light);
+}
+
+.footer-column a {
+    color: var(--gray-400);
+    font-size: 0.95rem;
+    transition: color var(--transition-fast);
+}
+
+.footer-column a:hover {
+    color: var(--accent-neon);
+}
+
+.footer-newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-newsletter h4 {
+    font-size: 1rem;
+    color: var(--primary-light);
+}
+
+.footer-newsletter p {
+    font-size: 0.95rem;
+    color: var(--gray-400);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: var(--gray-800);
+    border: 1px solid var(--gray-700);
+    border-radius: 8px;
+    color: var(--primary-light);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.newsletter-input:focus {
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+.newsletter-button {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--accent-neon), var(--accent-blue));
+    color: var(--primary-dark);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.newsletter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 255, 136, 0.3);
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--gray-800);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.footer-legal {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-legal a {
+    color: var(--gray-500);
+}
+
+.footer-legal a:hover {
+    color: var(--accent-neon);
+}
